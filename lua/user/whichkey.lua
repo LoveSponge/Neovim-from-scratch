@@ -183,5 +183,196 @@ local mappings = {
   },
 }
 
+local doomMappings = {
+  -- RET - Jump to bookmark
+  -- SPC - Find file in project
+  [' '] = { "", "Find file in project" },
+  -- TAB - +Workspace
+  -- '   - Resume last search
+  -- *   - Search for symbol in project
+  -- ,   - Switch workspace buffer
+  -- .   - Find file
+  -- /   - Search project
+  ["/"] = { "<cmd>Telescope live_grep theme=ivy<cr>", "Search project" },
+  -- :   - M-x (run command)
+  -- ;   - Eval expr
+  -- <   - Switch buffer
+  -- `   - Switch to last buffer
+  -- b   - +Buffer
+  b = {
+    name = "Buffer",
+    -- -   - Toggle narrowing
+    ['-'] = { "", "Toggle Narrowing" },
+    -- [   - Previous buffer
+    -- ]   - Next buffer
+    -- b   - Switch workspace buffer
+    -- B   - Switch buffer
+    B = {
+      "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
+      "Switch buffer"
+    }
+    -- c   - Clone buffer
+    -- d   - Kill buffer
+    -- i   - ibuffer
+    -- k   - Kill buffer
+    -- K   - Kill all buffers
+    -- l   - Switch to last buffer
+    -- m   - Set bookmark
+    -- M   - Delete bookmark
+    -- n   - Next buffer
+    -- N   - New empty buffer
+    -- O   - Kill other buffers
+    -- p   - Previous buffer
+    -- r   - Revert buffer
+    -- s   - Save buffer
+    -- S   - Save all buffers
+    -- u   - Save buffer as root
+    -- x   - Pop up scratch buffer
+    -- X   - Switch to scratch buffer
+  },
+  -- c   - +Code
+  c = {
+    name = "Code",
+    -- a   - LSP execute code action
+    a = { "", "LSP execute code action" }
+    -- c   - Compile
+    -- C   - Recompile
+    -- d   - Jump to definition
+    -- D   - Jump to references
+    -- e   - Evaluate buffer/region
+    -- E   - Evaluate & replace region
+    -- f   - Format buffer/region
+    -- i   - Find implementations
+    -- j   - Jump to symbol in current workspace
+    -- J   - Jump to symbol in any workspace
+    -- k   - Jump to documentation
+    -- l   - LSP
+    -- o   - LSP organise imports
+    -- r   - LSP rename
+    -- s   - Send to repl
+    -- t   - Find type  definition
+    -- w   - Delete trailing whitespace
+    -- W   - Delete trailing newlines
+    -- x   - List errors
+  },
+  -- f   - +File
+  f = {
+    name = "File",
+    -- c   - Open project editorconfig
+    c = { "", "Open project editorconfig" },
+    -- C   - Copy this file
+    -- d   - Find directory
+    -- D   - Delete this file
+    -- e   - Find file in emacs.d
+    -- E   - Browse emacs.d
+    -- f   - Find file
+    -- F   - Find file from here
+    -- l   - Locate file
+    -- p   - Find file in private config
+    -- P   - Browse private config
+    -- r   - Recent files
+    -- R   - Rename/move file
+    -- s   - Save file
+    s = { "<cmd>w!<CR>", "Save" },
+    -- S   - Save file as...
+    -- u   - Sudo find file
+    -- U   - Sudo this file
+    -- y   - Yank file path
+    -- Y   - Yank file path from project
+  },
+  -- g   - +Git
+  g = {
+    name = "Git",
+    g = { "<cmd>lua _LAZYGIT_TOGGLE()<CR>", "Lazygit" },
+    j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
+    k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
+    l = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame" },
+    p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
+    r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
+    R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
+    s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
+    u = {
+      "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
+      "Undo Stage Hunk",
+    },
+    o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
+    b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
+    c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
+    d = {
+      "<cmd>Gitsigns diffthis HEAD<cr>",
+      "Diff",
+    },
+  },
+  -- h   - +Help
+  -- i   - +Insert
+  -- n   - +Notes
+  -- o   - +Open
+  o = {
+    name = "Open",
+    -- d   - Start debugger
+    d = { "", "Start debugger" },
+    -- p   - Project sidebar
+    p = { "<cmd>NvimTreeToggle<cr>", "Project sidebar" },
+    -- P   - Find file in project sidebar
+    -- r   - REPL
+    -- R   - REPL (same window)
+    -- t   - Toggle vterm popup
+    t = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
+    -- T   - Open vterm here
+  },
+  -- p   - +Project
+  p = {
+    name = "Project",
+    -- .   - Browse project
+    ['.'] = { "", "Browse project" },
+    -- >   - Browse other project
+    -- a   - Add new project
+    -- b   - Switch to project buffer
+    -- d   - Remove known project
+    -- D   - Discover projects in folder
+    -- f   - Find file in project
+    -- F   - Find file in other project
+    -- p   - Switch project
+    P = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Switch project" },
+    -- s   - Save project files
+    -- t   - List project todos
+    -- x   - Pop up scratch buffer
+  },
+  -- q   - +Quit/session
+  q = {
+    name = "Quit/Session",
+    -- l   - Restore last session
+    ['l'] = { "", "Restore last session" },
+    -- L   - Restore session from file
+    -- q   - Quit Neovim
+    q = { "<cmd>q!<CR>", "Quit" },
+    -- Q   - Quit Neovim without saving
+    -- r   - Restart and restore Neovim
+    -- R   - Restart Neovim
+    -- s   - Quick save current session
+    -- S   - Save session to file
+    p = {
+      name = "Packer",
+      c = { "<cmd>PackerCompile<cr>", "Compile" },
+      i = { "<cmd>PackerInstall<cr>", "Install" },
+      s = { "<cmd>PackerSync<cr>", "Sync" },
+      S = { "<cmd>PackerStatus<cr>", "Status" },
+      u = { "<cmd>PackerUpdate<cr>", "Update" },
+    },
+  },
+  -- r   - +Remote
+  -- s   - +Search
+  -- t   - +Toggle
+    -- b   - Big mode
+    -- c   - Fill column indicator
+    -- f[lycheck] - ? lsp errors?
+    -- f   - Fullscreen
+    -- i   - Indent guides
+    -- I   - Indent style
+    -- l   - Line numbers
+    -- r   - Read-only mode
+    -- w   - Soft line wrapping
+}
+
 which_key.setup(setup)
 which_key.register(mappings, opts)
