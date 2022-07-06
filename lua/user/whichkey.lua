@@ -29,9 +29,9 @@ local setup = {
   key_labels = {
     -- override the label used to display some keys. It doesn't effect WK in any other way.
     -- For example:
-    -- ["<space>"] = "SPC",
-    -- ["<cr>"] = "RET",
-    -- ["<tab>"] = "TAB",
+    ["<space>"] = "SPC",
+    ["<cr>"] = "RET",
+    ["<tab>"] = "TAB",
   },
   icons = {
     breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
@@ -39,8 +39,8 @@ local setup = {
     group = "+", -- symbol prepended to a group
   },
   popup_mappings = {
-    scroll_down = "<c-d>", -- binding to scroll down inside the popup
-    scroll_up = "<c-u>", -- binding to scroll up inside the popup
+    scroll_down = "<c-n>", -- binding to scroll down inside the popup
+    scroll_up = "<c-p>", -- binding to scroll up inside the popup
   },
   window = {
     border = "rounded", -- none, single, double, shadow
@@ -50,7 +50,7 @@ local setup = {
     winblend = 0,
   },
   layout = {
-    height = { min = 4, max = 25 }, -- min and max height of the columns
+    height = { min = 4, max = 30 }, -- min and max height of the columns
     width = { min = 20, max = 50 }, -- min and max width of the columns
     spacing = 3, -- spacing between columns
     align = "left", -- align columns left, center or right
@@ -64,8 +64,8 @@ local setup = {
     -- list of mode / prefixes that should never be hooked by WhichKey
     -- this is mostly relevant for key maps that start with a native binding
     -- most people should not need to change this
-    i = { "j", "k" },
-    v = { "j", "k" },
+    -- i = { "j", "k" },
+    -- v = { "j", "k" },
   },
 }
 
@@ -80,22 +80,31 @@ local opts = {
 
 local mappings = {
   ["a"] = { "<cmd>Alpha<cr>", "Alpha" },
+  -- done
   ["b"] = {
     "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
     "Buffers",
   },
+  -- done
   ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
+  -- done
   ["w"] = { "<cmd>w!<CR>", "Save" },
+  -- done
   ["q"] = { "<cmd>q!<CR>", "Quit" },
+  -- done
   ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
   ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
+  -- done
   ["f"] = {
     "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
     "Find files",
   },
+  -- done
   ["F"] = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
+  -- done
   ["P"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
 
+  -- added
   p = {
     name = "Packer",
     c = { "<cmd>PackerCompile<cr>", "Compile" },
@@ -105,6 +114,7 @@ local mappings = {
     u = { "<cmd>PackerUpdate<cr>", "Update" },
   },
 
+  -- done
   g = {
     name = "Git",
     g = { "<cmd>lua _LAZYGIT_TOGGLE()<CR>", "Lazygit" },
@@ -128,6 +138,7 @@ local mappings = {
     },
   },
 
+  -- done
   l = {
     name = "LSP",
     a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
@@ -185,16 +196,20 @@ local mappings = {
 
 local doomMappings = {
   -- RET - Jump to bookmark
+  -- ['<cr>'] = { "", "Jump to bookmark" },
   -- SPC - Find file in project
-  [' '] = { "", "Find file in project" },
-  -- TAB - +Workspace
+  -- ['<space>'] = { "", "Find file in project" },
+  -- ['<tab>'] - +Workspace
   -- '   - Resume last search
   -- *   - Search for symbol in project
   -- ,   - Switch workspace buffer
   -- .   - Find file
+  ["."] = {
+    "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
+    "Find file",
+  },
   -- /   - Search project
   ["/"] = { "<cmd>Telescope live_grep theme=ivy<cr>", "Search project" },
-  -- :   - M-x (run command)
   -- ;   - Eval expr
   -- <   - Switch buffer
   -- `   - Switch to last buffer
@@ -210,9 +225,10 @@ local doomMappings = {
     B = {
       "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
       "Switch buffer"
-    }
+    },
     -- c   - Clone buffer
     -- d   - Kill buffer
+    d = { "<cmd>Bdelete!<CR>", "Kill Buffer" },
     -- i   - ibuffer
     -- k   - Kill buffer
     -- K   - Kill all buffers
@@ -234,7 +250,7 @@ local doomMappings = {
   c = {
     name = "Code",
     -- a   - LSP execute code action
-    a = { "", "LSP execute code action" }
+    a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "LSP Code Action" },
     -- c   - Compile
     -- C   - Recompile
     -- d   - Jump to definition
@@ -242,18 +258,55 @@ local doomMappings = {
     -- e   - Evaluate buffer/region
     -- E   - Evaluate & replace region
     -- f   - Format buffer/region
+    f = { "<cmd>lua vim.lsp.buf.format{async=true}<cr>", "Format" },
     -- i   - Find implementations
     -- j   - Jump to symbol in current workspace
     -- J   - Jump to symbol in any workspace
     -- k   - Jump to documentation
     -- l   - LSP
+    l = {
+      name = "LSP",
+      a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
+      d = {
+        "<cmd>Telescope lsp_document_diagnostics<cr>",
+        "Document Diagnostics",
+      },
+      w = {
+        "<cmd>Telescope lsp_workspace_diagnostics<cr>",
+        "Workspace Diagnostics",
+      },
+      f = { "<cmd>lua vim.lsp.buf.format{async=true}<cr>", "Format" },
+      i = { "<cmd>LspInfo<cr>", "Info" },
+      I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
+      j = {
+        "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>",
+        "Next Diagnostic",
+      },
+      k = {
+        "<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>",
+        "Prev Diagnostic",
+      },
+      l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
+      q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
+      r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
+      s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
+      S = {
+        "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
+        "Workspace Symbols",
+      },
+    },
     -- o   - LSP organise imports
     -- r   - LSP rename
+    r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "LSP Rename" },
     -- s   - Send to repl
     -- t   - Find type  definition
     -- w   - Delete trailing whitespace
     -- W   - Delete trailing newlines
     -- x   - List errors
+    x = {
+      "<cmd>Telescope lsp_document_diagnostics<cr>",
+      "Document Diagnostics",
+    },
   },
   -- f   - +File
   f = {
@@ -275,6 +328,7 @@ local doomMappings = {
     -- s   - Save file
     s = { "<cmd>w!<CR>", "Save" },
     -- S   - Save file as...
+    S = { "<cmd>w! ", "Save file as..." },
     -- u   - Sudo find file
     -- U   - Sudo this file
     -- y   - Yank file path
@@ -283,7 +337,7 @@ local doomMappings = {
   -- g   - +Git
   g = {
     name = "Git",
-    g = { "<cmd>lua _LAZYGIT_TOGGLE()<CR>", "Lazygit" },
+    t = { "<cmd>lua _LAZYGIT_TOGGLE()<CR>", "Toggle Lazygit" },
     j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
     k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
     l = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame" },
@@ -309,16 +363,11 @@ local doomMappings = {
   -- o   - +Open
   o = {
     name = "Open",
-    -- d   - Start debugger
-    d = { "", "Start debugger" },
-    -- p   - Project sidebar
+    -- d = { "", "Start debugger" },
     p = { "<cmd>NvimTreeToggle<cr>", "Project sidebar" },
     -- P   - Find file in project sidebar
-    -- r   - REPL
-    -- R   - REPL (same window)
-    -- t   - Toggle vterm popup
-    t = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
-    -- T   - Open vterm here
+    n = { "<cmd>lua _NODE_TOGGLE()<cr>", "Node REPL" },
+    t = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Toggle terminal popup" },
   },
   -- p   - +Project
   p = {
@@ -345,8 +394,9 @@ local doomMappings = {
     ['l'] = { "", "Restore last session" },
     -- L   - Restore session from file
     -- q   - Quit Neovim
-    q = { "<cmd>q!<CR>", "Quit" },
+    q = { "<cmd>wq!<CR>", "Quit" },
     -- Q   - Quit Neovim without saving
+    Q = { "<cmd>q!<CR>", "Quit" },
     -- r   - Restart and restore Neovim
     -- R   - Restart Neovim
     -- s   - Quick save current session
