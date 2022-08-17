@@ -217,9 +217,13 @@ local doomMappings = {
   b = {
     name = "Buffer",
     -- -   - Toggle narrowing
-    ['-'] = { "", "Toggle Narrowing" },
+    ['-'] = { "", "Toggle narrowing" },
     -- [   - Previous buffer
+    ['['] = { "<cmd>bprevious<CR>", "Previous buffer" },
+    p = { "<cmd>bprevious<CR>", "Previous buffer" },
     -- ]   - Next buffer
+    n = { "<cmd>bnext<CR>", "Next buffer" },
+    [']'] = { "<cmd>bnext<CR>", "Next buffer" },
     -- b   - Switch workspace buffer
     -- B   - Switch buffer
     B = {
@@ -228,7 +232,7 @@ local doomMappings = {
     },
     -- c   - Clone buffer
     -- d   - Kill buffer
-    d = { "<cmd>Bdelete!<CR>", "Kill Buffer" },
+    d = { "<cmd>Bdelete!<CR>", "Kill buffer" },
     -- i   - ibuffer
     -- k   - Kill buffer
     -- K   - Kill all buffers
@@ -250,7 +254,7 @@ local doomMappings = {
   c = {
     name = "Code",
     -- a   - LSP execute code action
-    a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "LSP Code Action" },
+    a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "LSP code action" },
     -- c   - Compile
     -- C   - Recompile
     -- d   - Jump to definition
@@ -266,38 +270,38 @@ local doomMappings = {
     -- l   - LSP
     l = {
       name = "LSP",
-      a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
+      a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code action" },
       d = {
         "<cmd>Telescope lsp_document_diagnostics<cr>",
-        "Document Diagnostics",
+        "Document diagnostics",
       },
       w = {
         "<cmd>Telescope lsp_workspace_diagnostics<cr>",
-        "Workspace Diagnostics",
+        "Workspace diagnostics",
       },
       f = { "<cmd>lua vim.lsp.buf.format{async=true}<cr>", "Format" },
       i = { "<cmd>LspInfo<cr>", "Info" },
-      I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
+      I = { "<cmd>LspInstallInfo<cr>", "Installer info" },
       j = {
         "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>",
-        "Next Diagnostic",
+        "Next diagnostic",
       },
       k = {
         "<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>",
-        "Prev Diagnostic",
+        "Prev diagnostic",
       },
-      l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
+      l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens action" },
       q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
       r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
-      s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
+      s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document symbols" },
       S = {
         "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
-        "Workspace Symbols",
+        "Workspace symbols",
       },
     },
     -- o   - LSP organise imports
     -- r   - LSP rename
-    r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "LSP Rename" },
+    r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "LSP rename" },
     -- s   - Send to repl
     -- t   - Find type  definition
     -- w   - Delete trailing whitespace
@@ -305,7 +309,7 @@ local doomMappings = {
     -- x   - List errors
     x = {
       "<cmd>Telescope lsp_document_diagnostics<cr>",
-      "Document Diagnostics",
+      "Document diagnostics",
     },
   },
   -- f   - +File
@@ -394,9 +398,9 @@ local doomMappings = {
     ['l'] = { "", "Restore last session" },
     -- L   - Restore session from file
     -- q   - Quit Neovim
-    q = { "<cmd>wq!<CR>", "Quit" },
+    q = { "<cmd>wqa!<CR>", "Quit" },
     -- Q   - Quit Neovim without saving
-    Q = { "<cmd>q!<CR>", "Quit" },
+    Q = { "<cmd>qa!<CR>", "Quit without saving" },
     -- r   - Restart and restore Neovim
     -- R   - Restart Neovim
     -- s   - Quick save current session
@@ -410,6 +414,10 @@ local doomMappings = {
       u = { "<cmd>PackerUpdate<cr>", "Update" },
     },
   },
+  w = {
+    name = "Window",
+    d = { "<cmd>q<cr>", "Close window" }
+  }
   -- r   - +Remote
   -- s   - +Search
   -- t   - +Toggle
@@ -425,4 +433,4 @@ local doomMappings = {
 }
 
 which_key.setup(setup)
-which_key.register(mappings, opts)
+which_key.register(doomMappings, opts)
