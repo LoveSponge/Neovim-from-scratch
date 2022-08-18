@@ -204,6 +204,10 @@ local doomMappings = {
   -- *   - Search for symbol in project
   -- ,   - Switch workspace buffer
   -- .   - Find file
+  ["<space>"] = {
+    "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
+    "Find file",
+  },
   ["."] = {
     "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
     "Find file",
@@ -217,7 +221,7 @@ local doomMappings = {
   b = {
     name = "Buffer",
     -- -   - Toggle narrowing
-    ['-'] = { "", "Toggle narrowing" },
+    --[[ ['-'] = { "", "Toggle narrowing" }, ]]
     -- [   - Previous buffer
     ['['] = { "<cmd>bprevious<CR>", "Previous buffer" },
     p = { "<cmd>bprevious<CR>", "Previous buffer" },
@@ -326,6 +330,7 @@ local doomMappings = {
     -- F   - Find file from here
     -- l   - Locate file
     -- p   - Find file in private config
+    p = { "", "Find file in private config" },
     -- P   - Browse private config
     -- r   - Recent files
     -- R   - Rename/move file

@@ -27,8 +27,8 @@ toggleterm.setup({
 })
 
 function _G.set_terminal_keymaps()
-  local opts = {noremap = true}
-  vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[<C-\><C-n>]], opts)
+  local opts = { silent = true }
+  vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[<C-\>]], opts)
   vim.api.nvim_buf_set_keymap(0, 't', '<C-h>', [[<C-\><C-n><C-W>h]], opts)
   vim.api.nvim_buf_set_keymap(0, 't', '<C-j>', [[<C-\><C-n><C-W>j]], opts)
   vim.api.nvim_buf_set_keymap(0, 't', '<C-k>', [[<C-\><C-n><C-W>k]], opts)
@@ -42,28 +42,33 @@ local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
 
 function _LAZYGIT_TOGGLE()
 	lazygit:toggle()
+  vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[<cmd>lua _LAZYGIT_TOGGLE()<CR>]], { noremap = true, silent = true })
 end
 
 local node = Terminal:new({ cmd = "node", hidden = true })
 
 function _NODE_TOGGLE()
 	node:toggle()
+  vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[<cmd>lua _NODE_TOGGLE()<CR>]], { noremap = true, silent = true })
 end
 
 local ncdu = Terminal:new({ cmd = "ncdu", hidden = true })
 
 function _NCDU_TOGGLE()
 	ncdu:toggle()
+  vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[<cmd>lua _NCDU_TOGGLE()<CR>]], { noremap = true, silent = true })
 end
 
 local htop = Terminal:new({ cmd = "htop", hidden = true })
 
 function _HTOP_TOGGLE()
 	htop:toggle()
+  vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[<cmd>lua _HTOP_TOGGLE()<CR>]], { noremap = true, silent = true })
 end
 
 local python = Terminal:new({ cmd = "python", hidden = true })
 
 function _PYTHON_TOGGLE()
 	python:toggle()
+  vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[<cmd>lua _PYTHON_TOGGLE()<CR>]], { noremap = true, silent = true })
 end
