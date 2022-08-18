@@ -330,7 +330,7 @@ local doomMappings = {
     -- F   - Find file from here
     -- l   - Locate file
     -- p   - Find file in private config
-    p = { "", "Find file in private config" },
+    p = { "<cmd>cd ~/.config/nvim/ <cr><cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>", "Find file in private config" },
     -- P   - Browse private config
     -- r   - Recent files
     -- R   - Rename/move file
@@ -391,7 +391,7 @@ local doomMappings = {
     -- f   - Find file in project
     -- F   - Find file in other project
     -- p   - Switch project
-    P = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Switch project" },
+    p = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Switch project" },
     -- s   - Save project files
     -- t   - List project todos
     -- x   - Pop up scratch buffer

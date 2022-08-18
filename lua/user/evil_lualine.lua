@@ -45,7 +45,10 @@ local config = {
     -- Disable sections and component separators
     component_separators = '',
     section_separators = '',
-    theme = 'auto'
+    theme = 'auto',
+    disabled_filetypes = {
+      nvimtree = {}
+    },
     -- theme = {
     --   -- We are going to use lualine_c an lualine_x as left and
     --   -- right section. Both are highlighted by c theme .  So we
@@ -73,6 +76,10 @@ local config = {
     lualine_c = {},
     lualine_x = {},
   },
+  tabline = {
+    lualine_c = {},
+    lualine_x = {}
+  }
 }
 
 -- Inserts a component in lualine_c at left section
@@ -84,6 +91,35 @@ end
 local function ins_right(component)
   table.insert(config.sections.lualine_x, component)
 end
+
+-- Inserts a component into the lua tabline
+local function ins_tabline_left(component)
+  table.insert(config.tabline.lualine_c, component)
+end
+local function ins_tabline_right(component)
+  table.insert(config.tabline.lualine_x, component)
+end
+
+ins_tabline_left {
+  'filename',
+  file_status = false,
+  path = 1,
+  cond = conditions.buffer_not_empty,
+  shorting_target = 0,
+
+  -- color = { fg = colors.magenta, gui = 'bold' },
+}
+ins_tabline_right {
+  'diff',
+  -- Is it me or the symbol for modified is really weird
+  symbols = { added = ' ', modified = '柳 ', removed = ' ' },
+  diff_color = {
+    added = { fg = colors.green },
+    modified = { fg = colors.orange },
+    removed = { fg = colors.red },
+  },
+  cond = conditions.check_git_workspace,
+}
 
 ins_left {
   function()
@@ -167,7 +203,7 @@ ins_left {
 ins_left {
   'filename',
   file_status = false,
-  path = 1,
+  path = 0,
   cond = conditions.buffer_not_empty,
   -- color = { fg = colors.magenta, gui = 'bold' },
 }
