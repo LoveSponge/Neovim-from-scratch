@@ -337,7 +337,7 @@ local doomMappings = {
     -- s   - Save file
     s = { "<cmd>w!<CR>", "Save" },
     -- S   - Save file as...
-    S = { "<cmd>w! ", "Save file as..." },
+    S = { "<cmd>wa!<CR>", "Save all..." },
     -- u   - Sudo find file
     -- U   - Sudo this file
     -- y   - Yank file path
