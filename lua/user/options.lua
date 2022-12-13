@@ -33,7 +33,7 @@ local options = {
   scrolloff = 8,                           -- is one of my fav
   sidescrolloff = 8,
   guifont = "Fira Code Nerd Fonts Mono:h11",               -- the font used in graphical neovim applications
-  hidden = true
+  hidden = true,
 }
 
 vim.opt.shortmess:append "c"
@@ -42,6 +42,22 @@ for k, v in pairs(options) do
   vim.opt[k] = v
 end
 
+vim.cmd [[
+  function! FoldText()
+    let line = getline(v:foldstart)
+    let folded_line_num = v:foldend - v:foldstart
+    let line_text = substitute(line, '^"{\+', '', 'g')
+    let fillcharcount = &textwidth - len(line_text) - len(folded_line_num)
+    return '+'. repeat(-, 4) . line_text . repeat('.', fillcharcount) . ' (' . folded_line_num . ' L)'
+  endfunction
+  set foldtext=FoldText()
+]]
+
 vim.cmd "set whichwrap+=<,>,[,],h,l"
-vim.cmd [[set iskeyword+=-]]
-vim.cmd [[set formatoptions-=cro]] -- TODO: this doesn't seem to work
+vim.cmd [[ set iskeyword+=- ]]
+vim.cmd [[ set foldmethod=expr ]]
+vim.cmd [[ set foldexpr=nvim_treesitter#foldexpr() ]]
+vim.cmd [[ set nofoldenable ]]
+vim.cmd [[ set list listchars=tab:->,trail:· ]]
+vim.cmd [[ set fillchars=fold:\ ]]
+vim.cmd [[ set formatoptions-=cro ]] -- TODO: this doesn't seem to work

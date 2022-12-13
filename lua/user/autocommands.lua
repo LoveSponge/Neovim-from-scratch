@@ -28,7 +28,18 @@ vim.cmd [[
     autocmd!
     autocmd User AlphaReady set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2
   augroup end
+
+  " autocmd BufWritePre * :%s/\s\+$//e
 ]]
+
+-- vim.cmd [[
+--   function! StripTrailingWhite()
+--     let l:winview = winsaveview()
+--     silent! %s/\s\+$//
+--     call winrestview(l:winview)
+--   endfunction
+-- ]]
+
 
 -- Autoformat
 -- augroup _lsp
