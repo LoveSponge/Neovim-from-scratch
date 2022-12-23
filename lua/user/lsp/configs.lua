@@ -10,6 +10,8 @@ local servers = {
   "cssls",
   "jsonls",
   "sumneko_lua",
+  "denols",
+  "rust_analyzer"
 }
 
 lsp_installer.setup({
