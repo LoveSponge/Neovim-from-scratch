@@ -320,7 +320,7 @@ local doomMappings = {
   f = {
     name = "File",
     -- c   - Open project editorconfig
-    c = { "", "Open project editorconfig" },
+    c = { "e .editorconfig", "Open project editorconfig" },
     -- C   - Copy this file
     -- d   - Find directory
     -- D   - Delete this file
