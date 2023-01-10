@@ -86,6 +86,9 @@ local config = {
 local function ins_left(component)
   table.insert(config.sections.lualine_c, component)
 end
+local function ins_inactive_left(component)
+  table.insert(config.inactive_sections.lualine_c, component)
+end
 
 -- Inserts a component in lualine_x ot right section
 local function ins_right(component)
@@ -109,6 +112,14 @@ ins_tabline_left {
 
   -- color = { fg = colors.magenta, gui = 'bold' },
 }
+ins_inactive_left {
+  'filename',
+  file_status = false,
+  path = 1,
+  cond = conditions.buffer_not_empty,
+  shorting_target = 0,
+}
+
 ins_tabline_right {
   'diff',
   -- Is it me or the symbol for modified is really weird
@@ -218,7 +229,7 @@ ins_left {
 ins_left {
   'progress',
   cond = conditions.buffer_not_empty,
-  padding = { left = 0, right = 0 }
+  padding = { left = 1, right = 0 }
   -- color = {
   --   fg = colors.fg,
   --   gui = 'bold'
