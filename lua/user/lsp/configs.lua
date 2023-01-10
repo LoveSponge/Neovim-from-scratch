@@ -10,6 +10,8 @@ local servers = {
   "cssls",
   "jsonls",
   "sumneko_lua",
+  "gopls",
+  "golangci_lint_ls"
 }
 
 lsp_installer.setup({
