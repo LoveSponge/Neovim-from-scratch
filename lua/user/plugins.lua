@@ -64,7 +64,6 @@ return packer.startup(function(use)
   use("gpanders/editorconfig.nvim")
 
 	-- Colorschemes
-	use({ "folke/tokyonight.nvim" })
 	use("lunarvim/darkplus.nvim")
   use("Shatur/neovim-ayu")
 
@@ -87,6 +86,7 @@ return packer.startup(function(use)
 
 	-- Telescope
 	use({ "nvim-telescope/telescope.nvim" })
+  use({ "nvim-telescope/telescope-fzf-native.nvim", run = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build" })
 
 	-- Treesitter
 	use({ "nvim-treesitter/nvim-treesitter" })
