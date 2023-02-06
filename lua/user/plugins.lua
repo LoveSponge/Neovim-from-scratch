@@ -45,6 +45,7 @@ return packer.startup(function(use)
 	use({ "wbthomason/packer.nvim" }) -- Have packer manage itself
 	use({ "nvim-lua/plenary.nvim" }) -- Useful lua functions used by lots of plugins
 	use({ "windwp/nvim-autopairs" }) -- Autopairs, integrates with both cmp and treesitter
+	use({ "numToStr/Comment.nvim" })
 	use({ "JoosepAlviste/nvim-ts-context-commentstring" })
 	use({ "kyazdani42/nvim-web-devicons" })
 	use({ "kyazdani42/nvim-tree.lua" })
@@ -57,6 +58,7 @@ return packer.startup(function(use)
 	use({ "lukas-reineke/indent-blankline.nvim" })
 	use({ "goolord/alpha-nvim" })
 	use("folke/which-key.nvim")
+  use { "ggandor/leap.nvim" }
 
   use("tpope/vim-surround")
   use("tpope/vim-repeat")
@@ -99,6 +101,11 @@ return packer.startup(function(use)
 
 	-- Git
 	use({ "lewis6991/gitsigns.nvim" })
+
+  -- Org-mode
+  use({ 'nvim-orgmode/orgmode' })
+
+  use({ 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' })
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
