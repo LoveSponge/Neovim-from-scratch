@@ -1,7 +1,16 @@
 -- Eviline config for lualine
 -- Author: shadmansaleh
 -- Credit: glepnir
-local lualine = require('lualine')
+--[[ local lualine = require('lualine') ]]
+local status_ok_lualine, lualine = pcall(require, "lualine")
+if not status_ok_lualine then
+  return
+end
+
+local status_ok_treesitter, treesitter = pcall(require, "nvim-treesitter")
+if not status_ok_treesitter then
+  return
+end
 
 -- Color table for highlights
 -- stylua: ignore
@@ -112,6 +121,19 @@ ins_tabline_left {
 
   -- color = { fg = colors.magenta, gui = 'bold' },
 }
+
+ins_tabline_left {
+  function ()
+    return treesitter.statusline {
+      indicator_size = 100,
+      type_patterns = { 'class', 'function', 'method' },
+      separator = ' » ' --' ➲ '
+      --[[ transform_function = '' ]]
+    }
+  end,
+  cond = conditions.buffer_not_empty,
+}
+
 ins_inactive_left {
   'filename',
   file_status = false,
