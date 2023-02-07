@@ -34,7 +34,7 @@ local options = {
   sidescrolloff = 8,
   guifont = "Fira Code Nerd Fonts Mono:h11",               -- the font used in graphical neovim applications
   hidden = true,
-  colorcolumn = 90
+  colorcolumn = "90"
 }
 
 vim.opt.shortmess:append "c"
