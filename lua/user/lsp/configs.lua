@@ -9,7 +9,7 @@ local servers = {
   "tsserver",
   "cssls",
   "jsonls",
-  "sumneko_lua",
+  "lua_ls",
   "denols",
   "rust_analyzer"
 }
