@@ -24,3 +24,5 @@ require "user.autocommands"
 require "user.orgmode"
 require "user.ufo"
 require "user.leap"
+
+require("nvim-tree").setup()

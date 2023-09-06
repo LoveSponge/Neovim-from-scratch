@@ -9,7 +9,6 @@ local servers = {
   "tsserver",
   "cssls",
   "jsonls",
-  "lua_ls",
   "denols",
   "rust_analyzer"
 }
