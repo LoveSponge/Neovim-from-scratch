@@ -144,8 +144,7 @@ ins_inactive_left {
 
 ins_tabline_right {
   'diff',
-  -- Is it me or the symbol for modified is really weird
-  symbols = { added = ' ', modified = '柳 ', removed = ' ' },
+  symbols = { added = ' ', modified = '󱗜 ', removed = ' ' },
   diff_color = {
     added = { fg = colors.green },
     modified = { fg = colors.orange },
@@ -203,7 +202,7 @@ ins_left {
 --   cond = conditions.buffer_not_empty,
 -- }
 ins_left {
-  'RO',
+  '󰌾',
   cond = conditions.buffer_is_readonly,
   color = { fg = colors.red }
 }
@@ -222,10 +221,10 @@ ins_left {
 -- }
 
 ins_left {
-    -- return '+'
-    -- '💾'
+    -- return ''
+    -- 💾 💿 󰠘 🖫 +
   function()
-   return '🖫'
+   return '󰆓'
   end,
   -- modified,
   cond = conditions.buffer_modified,
@@ -315,7 +314,6 @@ ins_left {
 
 ins_right {
   'filetype',
-  -- icon = '',
   color = { fg = colors.yellow, gui = 'bold' },
 }
 

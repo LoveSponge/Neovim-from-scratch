@@ -25,14 +25,14 @@ local options = {
   shiftwidth = 2,                          -- the number of spaces inserted for each indentation
   tabstop = 2,                             -- insert 2 spaces for a tab
   cursorline = true,                       -- highlight the current line
-  -- number = true,                           -- set numbered lines
+  number = true,                           -- set numbered lines
   relativenumber = false,                  -- set relative numbered lines
   numberwidth = 2,                         -- set number column width to 2 {default 4}
   signcolumn = "yes",                      -- always show the sign column, otherwise it would shift the text each time
   wrap = false,                            -- display lines as one long line
   scrolloff = 8,                           -- is one of my fav
   sidescrolloff = 8,
-  guifont = "Fira Code Nerd Fonts Mono:h11",               -- the font used in graphical neovim applications
+  guifont = "Fira Code Nerd Font Mono:h11",               -- the font used in graphical neovim applications
   hidden = true,
   colorcolumn = "90"
 }
@@ -56,9 +56,9 @@ end
 
 vim.cmd "set whichwrap+=<,>,[,],h,l"
 vim.cmd [[ set iskeyword+=- ]]
--- vim.cmd [[ set foldmethod=expr ]]
 -- vim.cmd [[ set foldexpr=nvim_treesitter#foldexpr() ]]
 -- vim.cmd [[ set nofoldenable ]]
 vim.cmd [[ set list listchars=tab:->,trail:· ]]
 vim.cmd [[ set fillchars=fold:\ ]]
 vim.cmd [[ set formatoptions-=cro ]] -- TODO: this doesn't seem to work
+vim.cmd [[ let g:editorconfig=v:true ]]

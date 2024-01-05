@@ -28,7 +28,7 @@ configs.setup({
     enable = true,
   },
   indent = {
-    enable = true,
+    enable = false,
     disable = { "" }
   },
   --[[ additional_vim_regex_highlighting = {'org'} ]]
