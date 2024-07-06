@@ -12,7 +12,7 @@ vim.o.concealcursor='nc'
 
 --[[ hi link OrgTodo special ]]
 
-orgmode.setup_ts_grammar()
+--[[ orgmode.setup_ts_grammar() ]]
 
 orgmode.setup {
   org_agenda_files = { "~/Sync/orgtasks/Tasks.org" },
