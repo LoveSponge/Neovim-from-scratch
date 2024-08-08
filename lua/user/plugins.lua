@@ -91,6 +91,9 @@ return packer.startup(function(use)
 	use({ "williamboman/nvim-lsp-installer" }) -- simple to use language server installer
 	use({ "jose-elias-alvarez/null-ls.nvim" }) -- for formatters and linters
 
+-- Debugging
+	use({ "mfussenegger/nvim-dap" }) -- Debugging in nvim
+
 	-- Telescope
 	use({ "nvim-telescope/telescope.nvim" })
   use({ "nvim-telescope/telescope-fzf-native.nvim", run = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build" })
