@@ -57,8 +57,9 @@ return packer.startup(function(use)
 	use({ "lewis6991/impatient.nvim" })
 	use({ "lukas-reineke/indent-blankline.nvim" })
 	use({ "goolord/alpha-nvim" })
-	use("folke/which-key.nvim")
-  use { "ggandor/leap.nvim" }
+	use({ "folke/which-key.nvim" })
+  use({ "ggandor/leap.nvim" })
+  use({ "echasnovski/mini.nvim" })
 
   use("tpope/vim-surround")
   use("tpope/vim-repeat")

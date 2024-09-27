@@ -6,7 +6,7 @@ end
 local lspconfig = require("lspconfig")
 
 local servers = {
-  "tsserver",
+  "ts_ls",
   "cssls",
   "jsonls",
   "denols",

@@ -26,28 +26,10 @@ local setup = {
   -- add operators that will trigger motion and text object completion
   -- to enable all native operators, set the preset / operators plugin above
   -- operators = { gc = "Comments" },
-  key_labels = {
-    -- override the label used to display some keys. It doesn't effect WK in any other way.
-    -- For example:
-    ["<space>"] = "SPC",
-    ["<cr>"] = "RET",
-    ["<tab>"] = "TAB",
-  },
   icons = {
     breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
     separator = "➜", -- symbol used between a key and it's label
     group = "+", -- symbol prepended to a group
-  },
-  popup_mappings = {
-    scroll_down = "<c-n>", -- binding to scroll down inside the popup
-    scroll_up = "<c-p>", -- binding to scroll up inside the popup
-  },
-  window = {
-    border = "rounded", -- none, single, double, shadow
-    position = "bottom", -- bottom, top
-    margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
-    padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
-    winblend = 0,
   },
   layout = {
     height = { min = 4, max = 30 }, -- min and max height of the columns
@@ -55,18 +37,7 @@ local setup = {
     spacing = 3, -- spacing between columns
     align = "left", -- align columns left, center or right
   },
-  ignore_missing = true, -- enable this to hide mappings for which you didn't specify a label
-  hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
   show_help = true, -- show help message on the command line when the popup is visible
-  triggers = "auto", -- automatically setup triggers
-  -- triggers = {"<leader>"} -- or specify a list manually
-  triggers_blacklist = {
-    -- list of mode / prefixes that should never be hooked by WhichKey
-    -- this is mostly relevant for key maps that start with a native binding
-    -- most people should not need to change this
-    -- i = { "j", "k" },
-    -- v = { "j", "k" },
-  },
 }
 
 local opts = {
@@ -435,6 +406,76 @@ local doomMappings = {
     -- l   - Line numbers
     -- r   - Read-only mode
     -- w   - Soft line wrapping
+}
+
+local updated_mappings = {
+  { "<leader>.", "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>", desc = "Find file", nowait = true, remap = false },
+  { "<leader>/", "<cmd>Telescope live_grep theme=ivy<cr>", desc = "Search project", nowait = true, remap = false },
+  { "<leader><space>", "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>", desc = "Find file", nowait = true, remap = false },
+  { "<leader>b", group = "Buffer", nowait = true, remap = false },
+  { "<leader>bB", "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>", desc = "Switch buffer", nowait = true, remap = false },
+  { "<leader>b[", "<cmd>bprevious<CR>", desc = "Previous buffer", nowait = true, remap = false },
+  { "<leader>b]", "<cmd>bnext<CR>", desc = "Next buffer", nowait = true, remap = false },
+  { "<leader>bd", "<cmd>Bdelete!<CR>", desc = "Kill buffer", nowait = true, remap = false },
+  { "<leader>bn", "<cmd>bnext<CR>", desc = "Next buffer", nowait = true, remap = false },
+  { "<leader>bp", "<cmd>bprevious<CR>", desc = "Previous buffer", nowait = true, remap = false },
+  { "<leader>c", group = "Code", nowait = true, remap = false },
+  { "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<cr>", desc = "LSP code action", nowait = true, remap = false },
+  { "<leader>cf", "<cmd>lua vim.lsp.buf.format{async=true}<cr>", desc = "Format", nowait = true, remap = false },
+  { "<leader>cl", group = "LSP", nowait = true, remap = false },
+  { "<leader>clI", "<cmd>LspInstallInfo<cr>", desc = "Installer info", nowait = true, remap = false },
+  { "<leader>clS", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", desc = "Workspace symbols", nowait = true, remap = false },
+  { "<leader>cla", "<cmd>lua vim.lsp.buf.code_action()<cr>", desc = "Code action", nowait = true, remap = false },
+  { "<leader>cld", "<cmd>Telescope lsp_document_diagnostics<cr>", desc = "Document diagnostics", nowait = true, remap = false },
+  { "<leader>clf", "<cmd>lua vim.lsp.buf.format{async=true}<cr>", desc = "Format", nowait = true, remap = false },
+  { "<leader>cli", "<cmd>LspInfo<cr>", desc = "Info", nowait = true, remap = false },
+  { "<leader>clj", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", desc = "Next diagnostic", nowait = true, remap = false },
+  { "<leader>clk", "<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>", desc = "Prev diagnostic", nowait = true, remap = false },
+  { "<leader>cll", "<cmd>lua vim.lsp.codelens.run()<cr>", desc = "CodeLens action", nowait = true, remap = false },
+  { "<leader>clq", "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", desc = "Quickfix", nowait = true, remap = false },
+  { "<leader>clr", "<cmd>lua vim.lsp.buf.rename()<cr>", desc = "Rename", nowait = true, remap = false },
+  { "<leader>cls", "<cmd>Telescope lsp_document_symbols<cr>", desc = "Document symbols", nowait = true, remap = false },
+  { "<leader>clw", "<cmd>Telescope lsp_workspace_diagnostics<cr>", desc = "Workspace diagnostics", nowait = true, remap = false },
+  { "<leader>cr", "<cmd>lua vim.lsp.buf.rename()<cr>", desc = "LSP rename", nowait = true, remap = false },
+  { "<leader>cx", "<cmd>Telescope lsp_document_diagnostics<cr>", desc = "Document diagnostics", nowait = true, remap = false },
+  { "<leader>f", group = "File", nowait = true, remap = false },
+  { "<leader>fS", "<cmd>wa!<CR>", desc = "Save all...", nowait = true, remap = false },
+  { "<leader>fc", "e .editorconfig", desc = "Open project editorconfig", nowait = true, remap = false },
+  { "<leader>fp", "<cmd>cd ~/.config/nvim/ <cr><cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>", desc = "Find file in private config", nowait = true, remap = false },
+  { "<leader>fs", "<cmd>w!<CR>", desc = "Save", nowait = true, remap = false },
+  { "<leader>g", group = "Git", nowait = true, remap = false },
+  { "<leader>gR", "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", desc = "Reset Buffer", nowait = true, remap = false },
+  { "<leader>gb", "<cmd>Telescope git_branches<cr>", desc = "Checkout branch", nowait = true, remap = false },
+  { "<leader>gc", "<cmd>Telescope git_commits<cr>", desc = "Checkout commit", nowait = true, remap = false },
+  { "<leader>gd", "<cmd>Gitsigns diffthis HEAD<cr>", desc = "Diff", nowait = true, remap = false },
+  { "<leader>gj", "<cmd>lua require 'gitsigns'.next_hunk()<cr>", desc = "Next Hunk", nowait = true, remap = false },
+  { "<leader>gk", "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", desc = "Prev Hunk", nowait = true, remap = false },
+  { "<leader>gl", "<cmd>lua require 'gitsigns'.blame_line()<cr>", desc = "Blame", nowait = true, remap = false },
+  { "<leader>go", "<cmd>Telescope git_status<cr>", desc = "Open changed file", nowait = true, remap = false },
+  { "<leader>gp", "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", desc = "Preview Hunk", nowait = true, remap = false },
+  { "<leader>gr", "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", desc = "Reset Hunk", nowait = true, remap = false },
+  { "<leader>gs", "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", desc = "Stage Hunk", nowait = true, remap = false },
+  { "<leader>gt", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", desc = "Toggle Lazygit", nowait = true, remap = false },
+  { "<leader>gu", "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>", desc = "Undo Stage Hunk", nowait = true, remap = false },
+  { "<leader>o", group = "Open", nowait = true, remap = false },
+  { "<leader>on", "<cmd>lua _NODE_TOGGLE()<cr>", desc = "Node REPL", nowait = true, remap = false },
+  { "<leader>op", "<cmd>NvimTreeToggle<cr>", desc = "Project sidebar", nowait = true, remap = false },
+  { "<leader>ot", "<cmd>ToggleTerm size=10 direction=horizontal<cr>", desc = "Toggle terminal popup", nowait = true, remap = false },
+  { "<leader>p", group = "Project", nowait = true, remap = false },
+  { "<leader>p.", "", desc = "Browse project", nowait = true, remap = false },
+  { "<leader>pp", "<cmd>lua require('telescope').extensions.projects.projects()<cr>", desc = "Switch project", nowait = true, remap = false },
+  { "<leader>q", group = "Quit/Session", nowait = true, remap = false },
+  { "<leader>qQ", "<cmd>qa!<CR>", desc = "Quit without saving", nowait = true, remap = false },
+  { "<leader>ql", "", desc = "Restore last session", nowait = true, remap = false },
+  { "<leader>qp", group = "Packer", nowait = true, remap = false },
+  { "<leader>qpS", "<cmd>PackerStatus<cr>", desc = "Status", nowait = true, remap = false },
+  { "<leader>qpc", "<cmd>PackerCompile<cr>", desc = "Compile", nowait = true, remap = false },
+  { "<leader>qpi", "<cmd>PackerInstall<cr>", desc = "Install", nowait = true, remap = false },
+  { "<leader>qps", "<cmd>PackerSync<cr>", desc = "Sync", nowait = true, remap = false },
+  { "<leader>qpu", "<cmd>PackerUpdate<cr>", desc = "Update", nowait = true, remap = false },
+  { "<leader>qq", "<cmd>wqa!<CR>", desc = "Quit", nowait = true, remap = false },
+  { "<leader>w", group = "Window", nowait = true, remap = false },
+  { "<leader>wd", "<cmd>q<cr>", desc = "Close window", nowait = true, remap = false },
 }
 
 which_key.setup(setup)
